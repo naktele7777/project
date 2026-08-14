@@ -1,1 +1,459 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juna77777Art — tapyba akrilu ant drobės</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAF9F5;
+    --bg-raised: #FFFFFF;
+    --bg-tint: #EFEDFA;
+    --line: rgba(28,27,25,0.09);
+    --line-strong: rgba(28,27,25,0.18);
+    --ink: #1C1B19;
+    --ink-dim: #625F5A;
+    --ink-faint: #9B968E;
+    --violet: #4A46C4;
+    --violet-dim: #B4B0E8;
+    --violet-deep: #322F8E;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
 
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  ::selection{ background:var(--violet-dim); color:var(--violet-deep); }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(250,249,245,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .brand{ font-family:var(--font-display); font-style:italic; font-weight:500; font-size:22px; letter-spacing:0.01em; }
+  .brand span{ color:var(--violet); font-style:normal; }
+  .navlinks{ display:flex; gap:40px; list-style:none; }
+  .navlinks a{
+    font-size:13px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--ink-dim); transition:color .25s ease; position:relative;
+  }
+  .navlinks a:hover{ color:var(--ink); }
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+    background:var(--violet); transition:width .3s ease;
+  }
+  .navlinks a:hover::after{ width:100%; }
+  .navtoggle{ display:none; background:none; border:0; color:var(--ink); font-size:24px; cursor:pointer; }
+
+  @media (max-width:760px){
+    .navlinks{
+      position:fixed; top:76px; left:0; right:0; bottom:0;
+      background:var(--bg); flex-direction:column; gap:0;
+      padding:8px 32px 40px;
+      transform:translateY(-110%); transition:transform .35s ease;
+    }
+    .navlinks.open{ transform:translateY(0); }
+    .navlinks li{ border-bottom:1px solid var(--line); }
+    .navlinks a{ display:block; padding:18px 0; }
+    .navtoggle{ display:block; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:76px; overflow:hidden;
+  }
+  .spotlight{
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(520px circle at var(--mx,50%) var(--my,30%), rgba(74,70,196,0.08), transparent 70%);
+    transition:background .1s linear;
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--violet); margin-bottom:22px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .eyebrow::before{ content:''; width:28px; height:1px; background:var(--violet-dim); }
+  h1.title{
+    font-family:var(--font-display); font-weight:500;
+    font-size:clamp(48px, 7vw, 92px); line-height:0.98; letter-spacing:-0.01em;
+  }
+  h1.title em{ font-style:italic; font-weight:400; color:var(--ink-dim); }
+  .hero-sub{ margin-top:26px; max-width:440px; font-size:17px; color:var(--ink-dim); font-weight:300; }
+  .hero-cta{ margin-top:38px; display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    padding:15px 28px; border:1px solid var(--line-strong);
+    transition:all .25s ease; cursor:pointer; background:none; color:var(--ink);
+    display:inline-block;
+  }
+  .btn:hover{ border-color:var(--violet); color:var(--violet); }
+  .btn.solid{ background:var(--violet); border-color:var(--violet); color:#FAF9F5; }
+  .btn.solid:hover{ background:transparent; color:var(--violet); }
+
+  .hero-art{ position:relative; aspect-ratio:3/4; border:1px solid var(--line); background:var(--bg-raised); }
+  .canvas-abstract{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(74,70,196,0.20), transparent 55%),
+      radial-gradient(ellipse at 75% 65%, rgba(180,176,232,0.55), transparent 60%),
+      linear-gradient(160deg, #FFFFFF, #F1EFE8 70%);
+  }
+  .canvas-abstract::after{
+    content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(100deg, rgba(28,27,25,0.035) 0 2px, transparent 2px 7px);
+  }
+  .hero-art-label{
+    position:absolute; bottom:-1px; left:-1px; right:-1px;
+    display:flex; justify-content:space-between;
+    font-family:var(--font-mono); font-size:11px; color:var(--ink-faint);
+    background:rgba(255,255,255,0.88); padding:10px 14px; border-top:1px solid var(--line);
+  }
+
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:280px; margin:0 auto 8px; }
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:34px; left:32px; z-index:2;
+    font-family:var(--font-mono); font-size:11px; color:var(--ink-faint);
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue .line{ width:1px; height:34px; background:var(--line-strong); position:relative; overflow:hidden; }
+  .scroll-cue .line::after{
+    content:''; position:absolute; top:-100%; left:0; width:100%; height:100%;
+    background:var(--violet); animation:drip 2.2s ease-in-out infinite;
+  }
+  @keyframes drip{ 0%{top:-100%;} 60%{top:100%;} 100%{top:100%;} }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:120px 0; border-top:1px solid var(--line); position:relative; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; gap:24px; flex-wrap:wrap; }
+  .kicker{ font-family:var(--font-mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet); margin-bottom:14px; }
+  h2.h-title{ font-family:var(--font-display); font-weight:500; font-size:clamp(32px,4vw,48px); letter-spacing:-0.01em; }
+  .section-note{ max-width:280px; font-size:14px; color:var(--ink-faint); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:start; }
+  .about-portrait{
+    aspect-ratio:4/5; position:relative; border:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(74,70,196,0.16), transparent 60%),
+      linear-gradient(200deg, #EFEDFA, #FFFFFF);
+  }
+  .about-portrait::after{
+    content:'A.V.'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-style:italic; font-size:64px; color:rgba(28,27,25,0.07);
+  }
+  .about-text p{ font-size:16px; color:var(--ink-dim); margin-bottom:20px; max-width:560px; }
+  .about-text p:first-of-type{ font-size:19px; color:var(--ink); font-weight:300; }
+  .facts{ margin-top:36px; display:grid; grid-template-columns:repeat(2,1fr); gap:24px 32px; max-width:480px; }
+  .fact dt{ font-family:var(--font-mono); font-size:11px; color:var(--violet); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px; }
+  .fact dd{ font-size:14px; color:var(--ink-dim); }
+
+  @media (max-width:820px){ .about-grid{ grid-template-columns:1fr; } .about-portrait{ max-width:280px; } }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid var(--line); background:var(--line); }
+  .g-item{ position:relative; aspect-ratio:4/5; overflow:hidden; cursor:pointer; background:var(--bg-raised); }
+  .g-canvas{ position:absolute; inset:0; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+  .g-item:nth-child(1) .g-canvas{ background:radial-gradient(ellipse at 30% 70%, rgba(74,70,196,0.22), transparent 60%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .g-item:nth-child(2) .g-canvas{ background:radial-gradient(ellipse at 65% 30%, rgba(180,176,232,0.6), transparent 55%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .g-item:nth-child(3) .g-canvas{ background:radial-gradient(ellipse at 50% 50%, rgba(28,27,25,0.06), transparent 60%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .g-item:nth-child(4) .g-canvas{ background:radial-gradient(ellipse at 20% 30%, rgba(180,176,232,0.5), transparent 55%), radial-gradient(ellipse at 80% 75%, rgba(74,70,196,0.18), transparent 55%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .g-item:nth-child(5) .g-canvas{ background:radial-gradient(ellipse at 75% 60%, rgba(74,70,196,0.20), transparent 60%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .g-item:nth-child(6) .g-canvas{ background:radial-gradient(ellipse at 40% 40%, rgba(180,176,232,0.45), transparent 50%), radial-gradient(ellipse at 65% 70%, rgba(28,27,25,0.05), transparent 55%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .g-canvas::after{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(105deg, rgba(28,27,25,0.03) 0 2px, transparent 2px 6px); }
+  .g-item:hover .g-canvas{ transform:scale(1.06); }
+  .g-veil{
+    position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:20px; background:linear-gradient(0deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0) 55%);
+    opacity:0; transition:opacity .4s ease;
+  }
+  .g-item:hover .g-veil{ opacity:1; }
+  .g-veil .gt{ font-family:var(--font-display); font-style:italic; font-size:20px; margin-bottom:4px; color:var(--ink); }
+  .g-veil .gm{ font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; }
+
+  @media (max-width:820px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .gallery-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- SHOP ---------- */
+  .shop-list{ border-top:1px solid var(--line); }
+  .shop-row{
+    display:grid; grid-template-columns:90px 1fr auto auto; gap:24px; align-items:center;
+    padding:26px 0; border-bottom:1px solid var(--line); transition:background .25s ease;
+  }
+  .shop-row:hover{ background:var(--bg-tint); }
+  .shop-thumb{ width:64px; height:80px; border:1px solid var(--line); }
+  .shop-row:nth-child(1) .shop-thumb{ background:radial-gradient(ellipse at 30% 70%, rgba(74,70,196,0.22), transparent 60%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .shop-row:nth-child(2) .shop-thumb{ background:radial-gradient(ellipse at 65% 30%, rgba(180,176,232,0.6), transparent 55%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .shop-row:nth-child(3) .shop-thumb{ background:radial-gradient(ellipse at 50% 50%, rgba(28,27,25,0.06), transparent 60%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .shop-row:nth-child(4) .shop-thumb{ background:radial-gradient(ellipse at 75% 60%, rgba(74,70,196,0.20), transparent 60%), linear-gradient(150deg,#FFFFFF,#F1EFE8); }
+  .shop-info .st{ font-family:var(--font-display); font-size:19px; margin-bottom:4px; }
+  .shop-info .sm{ font-size:13px; color:var(--ink-faint); }
+  .shop-status{ font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; }
+  .shop-status.available{ color:#3E7A4F; }
+  .shop-status.sold{ color:var(--ink-faint); }
+  .shop-price{ font-family:var(--font-mono); font-size:16px; color:var(--violet); text-align:right; min-width:90px; }
+
+  @media (max-width:640px){
+    .shop-row{ grid-template-columns:56px 1fr; row-gap:8px; }
+    .shop-status, .shop-price{ grid-column:2; text-align:left; }
+  }
+
+  .shop-note{ margin-top:32px; font-size:13px; color:var(--ink-faint); border-left:2px solid var(--violet-dim); padding-left:16px; max-width:520px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; }
+  .contact-info p{ color:var(--ink-dim); max-width:380px; margin-bottom:32px; font-size:16px; }
+  .contact-list{ list-style:none; display:flex; flex-direction:column; gap:16px; }
+  .contact-list a{
+    font-family:var(--font-mono); font-size:14px; color:var(--ink);
+    display:inline-flex; align-items:center; gap:10px;
+    border-bottom:1px solid var(--line); padding-bottom:10px; width:fit-content;
+    transition:color .25s ease, border-color .25s ease;
+  }
+  .contact-list a:hover{ color:var(--violet); border-color:var(--violet); }
+
+  form{ display:flex; flex-direction:column; gap:22px; }
+  .field label{
+    display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px;
+  }
+  .field input, .field textarea{
+    width:100%; background:var(--bg-raised); border:1px solid var(--line);
+    color:var(--ink); font-family:var(--font-body); font-size:15px; padding:14px 16px;
+    transition:border-color .25s ease; resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--violet-dim); }
+  .field textarea{ min-height:110px; }
+  .form-msg{ font-family:var(--font-mono); font-size:12px; color:#3E7A4F; min-height:16px; }
+
+  @media (max-width:820px){ .contact-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top:1px solid var(--line); padding:36px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  footer .fbrand{ font-family:var(--font-display); font-style:italic; font-size:16px; color:var(--ink-dim); }
+  footer .fmeta{ font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); letter-spacing:0.04em; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .scroll-cue .line::after{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#" class="brand">Juna77777<span>Art</span></a>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#apie">Apie mane</a></li>
+      <li><a href="#galerija">Darbai</a></li>
+      <li><a href="#parduotuve">Įsigyti</a></li>
+      <li><a href="#kontaktai">Kontaktai</a></li>
+    </ul>
+    <button class="navtoggle" id="navtoggle" aria-label="Meniu">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="spotlight" id="spotlight"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Akrilas ant drobės · Vilnius</div>
+      <h1 class="title">Šviesa, kuri<br>išnyra iš <em>tylos</em></h1>
+      <p class="hero-sub">Aš tapau vakarais, kai diena aprimsta — darbai gimsta akrilu ant drobės su porėmiu, iš kontrasto tarp gilaus violetinio ir plikos drobės. Tai mano, kaip mėgėjos, kelionė per šešėlį ir šviesą.</p>
+      <div class="hero-cta">
+        <a href="#galerija" class="btn solid">Žiūrėti darbus</a>
+        <a href="#kontaktai" class="btn">Susisiekti</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="canvas-abstract"></div>
+      <div class="hero-art-label"><span>Studija, 2026</span><span>N. 01</span></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div><span>slink žemyn</span></div>
+</section>
+
+<section id="apie">
+  <div class="wrap about-grid">
+    <div class="reveal about-portrait"></div>
+    <div class="reveal about-text">
+      <div class="kicker">Apie mane</div>
+      <h2 class="h-title" style="margin-bottom:28px;">Piešiu tai, ko negaliu pasakyti žodžiais</h2>
+      <p>Esu Juna — dieną dirbu visai kitą darbą, o vakarais grįžtu prie molberto. Tapyba man nėra profesija, tai būdas sustoti ir pažvelgti į save atidžiau.</p>
+      <p>Mane traukia švarūs fonai ir viena spalvos dėmė juose — momentas, kuris viską pasako be papildomų detalių. Dirbu daugiausia akrilu ant drobės su porėmiu, retkarčiais — violetiniu pigmentu kontūrams paryškinti.</p>
+      <div class="facts">
+        <div class="fact"><dt>Technika</dt><dd>Akrilas ant drobės, su porėmiu</dd></div>
+        <div class="fact"><dt>Nuo</dt><dd>2021 m., savarankiškai</dd></div>
+        <div class="fact"><dt>Darbų skaičius</dt><dd>Per 40 baigtų kūrinių</dd></div>
+        <div class="fact"><dt>Studija</dt><dd>Namų dirbtuvė, Vilnius</dd></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerija">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">Portfolio</div>
+        <h2 class="h-title">Pasirinkti darbai</h2>
+      </div>
+      <p class="section-note">Kiekvienas paveikslas — atskiras vakaras, atskira nuotaika. Užveskite pelę, kad pamatytumėte pavadinimą.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="g-item"><div class="g-canvas"></div><div class="g-veil"><div class="gt">Prieblanda</div><div class="gm">Akrilas, porėmis · 50×70</div></div></div>
+      <div class="g-item"><div class="g-canvas"></div><div class="g-veil"><div class="gt">Švelnus atspindys</div><div class="gm">Akrilas, porėmis · 60×80</div></div></div>
+      <div class="g-item"><div class="g-canvas"></div><div class="g-veil"><div class="gt">Tylos studija</div><div class="gm">Akrilas, porėmis · 40×50</div></div></div>
+      <div class="g-item"><div class="g-canvas"></div><div class="g-veil"><div class="gt">Dvi kryptys</div><div class="gm">Akrilas, porėmis · 70×90</div></div></div>
+      <div class="g-item"><div class="g-canvas"></div><div class="g-veil"><div class="gt">Ryto kelias</div><div class="gm">Akrilas, porėmis · 45×60</div></div></div>
+      <div class="g-item"><div class="g-canvas"></div><div class="g-veil"><div class="gt">Šviesos sodas</div><div class="gm">Akrilas, porėmis · 50×50</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="parduotuve">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">Įsigyti</div>
+        <h2 class="h-title">Originalai ir kainos</h2>
+      </div>
+      <p class="section-note">Kiekvienas darbas — originalas, tik viename egzemplioriuje. Persiunčiu visoje Lietuvoje.</p>
+    </div>
+    <div class="shop-list reveal">
+      <div class="shop-row">
+        <div class="shop-thumb"></div>
+        <div class="shop-info"><div class="st">Prieblanda</div><div class="sm">Akrilas ant drobės, su porėmiu, 50×70 cm</div></div>
+        <div class="shop-status available">Laisva</div>
+        <div class="shop-price">€180</div>
+      </div>
+      <div class="shop-row">
+        <div class="shop-thumb"></div>
+        <div class="shop-info"><div class="st">Švelnus atspindys</div><div class="sm">Akrilas ant drobės, su porėmiu, 60×80 cm</div></div>
+        <div class="shop-status sold">Parduota</div>
+        <div class="shop-price">€240</div>
+      </div>
+      <div class="shop-row">
+        <div class="shop-thumb"></div>
+        <div class="shop-info"><div class="st">Tylos studija</div><div class="sm">Akrilas ant drobės, su porėmiu, 40×50 cm</div></div>
+        <div class="shop-status available">Laisva</div>
+        <div class="shop-price">€95</div>
+      </div>
+      <div class="shop-row">
+        <div class="shop-thumb"></div>
+        <div class="shop-info"><div class="st">Ryto kelias</div><div class="sm">Akrilas ant drobės, su porėmiu, 45×60 cm</div></div>
+        <div class="shop-status available">Laisva</div>
+        <div class="shop-price">€160</div>
+      </div>
+    </div>
+    <p class="shop-note">Priimu ir individualius užsakymus — jei norite darbo pagal jūsų erdvę ar nuotaiką, parašykite žemiau esančioje formoje.</p>
+  </div>
+</section>
+
+<section id="kontaktai">
+  <div class="wrap contact-grid">
+    <div class="reveal contact-info">
+      <div class="kicker">Kontaktai</div>
+      <h2 class="h-title" style="margin-bottom:22px;">Parašykime vieni kitiems</h2>
+      <p>Ar norite užsakyti darbą, susitarti dėl parodos, ar tiesiog pasidalinti įspūdžiu — mielai atsakysiu.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:juna77777art@example.lt">juna77777art@example.lt</a></li>
+        <li><a href="#">@juna77777art</a></li>
+        <li><a href="#">Vilnius, Lietuva</a></li>
+      </ul>
+    </div>
+    <form class="reveal" id="contactForm">
+      <div class="field"><label for="name">Vardas</label><input id="name" type="text" placeholder="Jūsų vardas" required></div>
+      <div class="field"><label for="email">El. paštas</label><input id="email" type="email" placeholder="jusu@paštas.lt" required></div>
+      <div class="field"><label for="msg">Žinutė</label><textarea id="msg" placeholder="Papasakokite, ko ieškote..." required></textarea></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <button type="submit" class="btn solid">Siųsti žinutę</button>
+        <span class="form-msg" id="formMsg"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span class="fbrand">Juna77777Art</span>
+  <span class="fmeta">© 2026 · visi darbai originalūs, autorinės teisės saugomos</span>
+</footer>
+
+<script>
+  const navtoggle = document.getElementById('navtoggle');
+  const navlinks = document.getElementById('navlinks');
+  navtoggle.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  const hero = document.querySelector('.hero');
+  const spotlight = document.getElementById('spotlight');
+  if (window.matchMedia('(hover: hover)').matches) {
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      spotlight.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      spotlight.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const form = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const msg = document.getElementById('msg').value.trim();
+    if (!name || !email || !msg) {
+      formMsg.style.color = '#4A46C4';
+      formMsg.textContent = 'Prašau užpildyti visus laukus.';
+      return;
+    }
+    formMsg.style.color = '#3E7A4F';
+    formMsg.textContent = 'Ačiū, ' + name.split(' ')[0] + ' — žinutė paruošta siųsti.';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
